@@ -2,10 +2,10 @@
 @tailwind utilities;
 @tailwind components;
 
-.dark{
-  @apply h-full w-full bg-slate-400 text-stone-900;
+:root{
+  @apply h-full bg-slate-500;
 }
 
-.light{
-  @apply h-full w-full bg-stone-800 text-amber-300;
+.dark{
+  @apply h-full bg-stone-800;
 }

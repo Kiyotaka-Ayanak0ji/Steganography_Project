@@ -1,14 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@keyframes slide{
-    0%,100%{
-        transform: translateY(100); 
+@keyframes sun-rev{
+    100%{
+        transform: rotate(-180deg);
+        opacity: 0.4;
     }
-    /* Initial position... */
-    50%{
-        transform: translateY(0);
+}
+
+@keyframes moon-rev{
+    100%{
+        opacity: 0.4;
     }
 }
 
@@ -42,8 +41,8 @@ continues until 100% and shrinks the underline */
     width: 0%; /*Start with 0 width */
     height: 2.5px; /*Height of the underline */
     background-color: currentColor;
-    transition: width 0.4s ease-in-out;
-    animation: underline 1.2s ease-in-out;
+    transition: width 0.1s ease-in-out;
+    animation: underline 1s ease-in-out;
 }
 
 .underline-effect:hover::after:hover{
@@ -54,6 +53,7 @@ continues until 100% and shrinks the underline */
 @keyframes sun{
     100%{
         transform: rotate(180deg);
+        opacity: 1;
     }
 }
 
@@ -63,14 +63,22 @@ continues until 100% and shrinks the underline */
     }
 }
 
-.animate-slide:hover{
-    animation: slide 1s ease-in-out;
+.animate-sun:hover{
+    animation: sun 1s ease-out;
 }
 
-.animate-sun:hover{
-    animation: sun 1s ease-in-out;
+.animate-sun{
+    animation: sun-rev 1s ease-out forwards;
+}
+
+.animate-moon{
+    animation: moon-rev 1s ease-in-out forwards;
 }
 
 .animate-moon:hover{
-    animation: moon 1.2s ease-in-out;
+    animation: moon 1s ease-in-out;
+}
+
+.animate-slide:hover{
+    animation: slide 1s ease-in-out;
 }

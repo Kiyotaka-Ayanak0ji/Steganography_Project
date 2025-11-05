@@ -1,13 +1,13 @@
 import { createBrowserRouter} from 'react-router-dom';
-import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Encrypt from '../pages/Encrypt';
 import Decrypt from '../pages/Decrypt';
+import Layout from '../layout';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home/>,
+        element: <Layout/>,
     },
     {
         path: '/encrypt',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 const Decrypt: React.FC = (props) => {
+    
     const [state, setState] = useState(false);
 
     if (props.stego) {

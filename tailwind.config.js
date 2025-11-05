@@ -8,6 +8,9 @@ export default {
   theme: {
     extend: {},
   },
+  // Manual dark mode toggle extra config for
+  //  document.body.classList.add('dark') to work properly...
+  darkMode: 'class',
   plugins: [],
 }
 

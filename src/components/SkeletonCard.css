@@ -1,0 +1,12 @@
+@keyframes load{
+    0%{
+        opacity:0.4;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.animate-load{
+    animation: alternate load 1.5s ease-in-out infinite
+}
