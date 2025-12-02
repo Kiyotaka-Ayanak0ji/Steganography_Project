@@ -19,7 +19,7 @@ const ListBox = () => {
 
     return (
         <div className="relative w-48 flex flex-col gap-1">
-            <button type='button'
+            <button aria-required type='button'
                 className="w-40 flex flex-row gap-3 rounded-lg 
                 bg-slate-200 dark:bg-stone-800 dark:border-slate-100 border-[1px] 
                 dark:text-cyan-200 p-2 justify-around"

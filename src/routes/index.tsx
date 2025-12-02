@@ -3,6 +3,7 @@ import NotFound from '../pages/NotFound';
 import Encrypt from '../pages/Encrypt';
 import Decrypt from '../pages/Decrypt';
 import Layout from '../layout';
+import SkeletonCard from '../components/SkeletonCard';
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     {
         path: '*',
         element: <NotFound />
-    }
+    },
 ]);
 
 export default router;

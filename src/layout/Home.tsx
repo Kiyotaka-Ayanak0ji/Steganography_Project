@@ -2,7 +2,6 @@ import Card from '../components/Card';
 import encrypt from "../assets/image.png";
 import object from "../assets/document1.png";
 import decrypt from "../assets/decryption.png";
-import SkeletonCard from '../components/SkeletonCard';
 
 const Home = () => {
   const card_list = [
