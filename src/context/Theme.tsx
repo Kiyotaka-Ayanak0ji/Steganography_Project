@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 //Create the interface for the context props...
 interface ThemeContextProps {
@@ -14,8 +14,21 @@ const ThemeContext = createContext<ThemeContextProps>({
 });
 
 const ThemeProvider: React.FC<React.PropsWithChildren> = ({children}) => {
-    const [theme,setTheme] = useState('light');
+    const [theme,setTheme] = useState(localStorage.getItem("theme")??'light');
     
+    useEffect(() => {
+                
+        if(theme === 'dark'){
+            document.documentElement.classList.add("dark");
+        }
+        else{
+            document.documentElement.classList.remove("dark");
+        }
+
+        localStorage.setItem("theme",theme);
+        
+    },[theme])
+
     const valueToShare = {
         theme,
         setTheme

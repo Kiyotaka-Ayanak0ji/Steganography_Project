@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <div className='flex flex-col gap-2 w-full items-center'>
       <div className='flex w-full font-mono mt-5 text-6xl items-center justify-center text-stone-700 dark:text-cyan-400'>
-        Stenography
+        Steganography
       </div>
       <div className='flex gap-20 flex-row h-60 items-center w-full mt-20 ml-96'>
         {

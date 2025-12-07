@@ -7,28 +7,14 @@ const Navbar = () => {
     
     //Use theme context to manage the dark mode context globally..
     const { theme , setTheme} = useContext(ThemeContext);
-    let currentTheme = localStorage.getItem("theme")??"light";
     
     const navigate = useNavigate();
 
     const toggleTheme = () => {
-        let newTheme;
+        let newTheme = (theme === "light")? "dark" : "light";
 
-        if(currentTheme === 'light'){
-            //Change the theme..
-            newTheme = "dark";
-            document.body.classList.add("dark");
-        }
-        else{
-            newTheme = "light";
-            document.body.classList.remove("dark");
-        }
-        
         //Toggle themes and context... 
         setTheme(newTheme);
-        
-        //Store new theme in local Storage...
-        localStorage.setItem("theme",newTheme);
     }
 
     if(theme === 'dark'){

@@ -4,6 +4,7 @@ import Encrypt from '../pages/Encrypt';
 import Decrypt from '../pages/Decrypt';
 import Layout from '../layout';
 import SkeletonCard from '../components/SkeletonCard';
+import Output from '../pages/Output';
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     {
         path: '/decrypt',
         element: <Decrypt/>
+    },
+    {
+        path: "/output",
+        element: <Output/> 
     },
     {
         path: '*',

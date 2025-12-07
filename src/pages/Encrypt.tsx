@@ -37,27 +37,7 @@ const Encrypt:React.FC = () => {
                 transition duration-300'
             />
           </div>
-          
-          <div className='flex flex-row gap-44 w-full pt-2 pb-2 justify-center'>
-            <label 
-              htmlFor='cover'
-              className='flex text-xl dark:text-sky-300 text-stone-950'
-            >
-              Upload Cover Image
-            </label>
-            <input
-              required
-              id='cover' 
-              type='file' 
-              className='max-w-56 font-serif text-stone-800 dark:text-slate-400' 
-            />
-          </div> 
-          <div className="flex flex-row gap-32 w-full pt-2 pb-2 justify-center items-center">
-            <label className='text-xl dark:text-sky-300 text-stone-950'>
-              Select Encryption Algorithm
-            </label>
-            <ListBox/>
-          </div>
+       
           <div className='flex flex-row items-center justify-evenly gap-52 w-full pt-2 pb-5'>
             <label 
               htmlFor='key'
@@ -74,6 +54,50 @@ const Encrypt:React.FC = () => {
               font-medium w-52 rounded-lg outline-none
               pl-6' 
             />
+          </div>
+
+          <div className="flex flex-row gap-32 w-full pb-2 justify-around items-center">
+            <label className='text-xl dark:text-sky-300 text-stone-950'>
+              Select Encryption Algorithm
+            </label>
+            <ListBox/>
+          </div>
+
+          <div className='flex flex-row gap-44 w-full pt-2 pb-2 justify-evenly items-center'>
+            <label 
+              htmlFor='cover'
+              className='flex text-xl dark:text-sky-300 text-stone-950'
+            >
+              Upload Cover Image
+            </label>
+            <input
+              required
+              id='cover' 
+              type='file' 
+              className='hidden max-w-56 font-serif text-stone-800 dark:text-slate-400' 
+            />
+
+            <label 
+              htmlFor="cover"
+              className="
+                cursor-pointer
+                bg-blue-500 
+                hover:bg-blue-600 
+                text-white 
+                dark:bg-stone-600 
+                dark:hover:bg-stone-500
+                dark:text-sky-200
+                px-4 py-2 
+                rounded-lg 
+                shadow-md 
+                transition
+                duration-300
+                max-w-56
+                text-center
+                        "
+                      >
+              Choose File
+            </label>
           </div>
           <div className="w-full text-center">
             <button type='submit' className='text-xl text-white dark:text-blue-600 dark:bg-white/50 dark:hover:bg-white font-medium bg-blue-400 hover:bg-blue-600 rounded-lg p-2'>
