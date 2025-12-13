@@ -1,13 +1,54 @@
 import React, { useState } from 'react';
 import ListBox from '../components/ListBox';
 import './Encrypt.css';
+import toast from 'react-hot-toast';
+
+//Response type..
+type EncryptResponse = 
+  {success: true, type: "image", output_image_url: string} |
+  {success: true, type: "text", ciphertext: string} |
+  {error: string};
 
 const Encrypt:React.FC = () => {
 
-  const handleSubmit = () => {
-    console.log("Hello");
-  }
+  //Manage state for form data...
+  const [algorithm, setAlgorithm] = useState("Default(AES)"); // Pass as prop to Listbox to track changes...
+  const [plaintext,setPlaintext] = useState("");
+  const [key,setKey] = useState("");
+  const [imageFile,setImageFile] = useState<File|null>(null);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    //Initial debug
+    console.log(algorithm);
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("algoritm",algorithm);
+    formData.append("plaintext",plaintext);
+    formData.append("key",key);
+    if(imageFile){
+      formData.append("image",imageFile);
+    }
+    //Debug
+    for (let p of formData.entries()){
+      console.log(p)
+    }
+
+    //Middleware..
+    const response = await fetch('http://localhost:500/api/encrypt', {
+      method: "POST",
+      body: formData
+    });
+
+    const data:EncryptResponse = await response.json();
+
+    if("error" in data){
+      toast.error(data.error);
+
+      //Toast the error...
+      return;
+    }
+  }
 
   return(
     <div className="flex flex-col w-full h-auto justify-center items-center">
@@ -15,19 +56,20 @@ const Encrypt:React.FC = () => {
         Encrypt Plaintext
       </h1>
       <div className='pt-10 flex flex-col gap-5 w-1/2 justify-center'>
-        <form onSubmit={() => handleSubmit} className='bg-slate-600 dark:bg-stone-700 rounded-xl p-5 hover:shadow-2xl transition ease-in-out'>
+        <form onSubmit={handleSubmit} className='bg-slate-600 dark:bg-stone-700 rounded-xl p-5 hover:shadow-2xl transition ease-in-out'>
           <div className="flex flex-row gap-52 w-full pt-2 pb-2 items-center justify-evenly">
             <label 
-              htmlFor='message'
+              htmlFor='plaintext'
               className='flex text-xl text-stone-950 dark:text-sky-300'>
                 Plaintext
             </label>
 
             <input
               required
-              name='message'
-              id='message' 
+              name='plaintext'
+              id='plaintext' 
               type='text'
+              onChange={(e) => setPlaintext(e.target.value)}
               className='flex p-2 
                 dark:text-lime-400 
                 focus:border-blue-500 border-2
@@ -48,7 +90,9 @@ const Encrypt:React.FC = () => {
             <input
               required
               id='key' 
-              type='text' 
+              name='key'
+              type='text'
+              onChange={(e) => setKey(e.target.value)} 
               className='flex p-2 dark:text-lime-400 
               focus:border-blue-500 border-2 dark:bg-stone-500 
               font-medium w-52 rounded-lg outline-none
@@ -60,25 +104,30 @@ const Encrypt:React.FC = () => {
             <label className='text-xl dark:text-sky-300 text-stone-950'>
               Select Encryption Algorithm
             </label>
-            <ListBox/>
+            <ListBox selected={algorithm} setSelected={setAlgorithm}/>
           </div>
 
           <div className='flex flex-row gap-44 w-full pt-2 pb-2 justify-evenly items-center'>
             <label 
-              htmlFor='cover'
+              htmlFor='image'
               className='flex text-xl dark:text-sky-300 text-stone-950'
             >
               Upload Cover Image
             </label>
             <input
-              required
-              id='cover' 
+              id='image'
+              name='cover_image'
+              onChange={(e) => {
+                if(e.target.files && e.target.files[0]){
+                  setImageFile(e.target.files[0]);
+                }
+              }} 
               type='file' 
               className='hidden max-w-56 font-serif text-stone-800 dark:text-slate-400' 
             />
 
             <label 
-              htmlFor="cover"
+              htmlFor="image"
               className="
                 cursor-pointer
                 bg-blue-500 
@@ -86,21 +135,20 @@ const Encrypt:React.FC = () => {
                 text-white 
                 dark:bg-stone-600 
                 dark:hover:bg-stone-500
-                dark:text-sky-200
+                dark:text-amber-200
+                text-lg
                 px-4 py-2 
                 rounded-lg 
-                shadow-md 
                 transition
                 duration-300
                 max-w-56
-                text-center
-                        "
-                      >
+                text-center">
               Choose File
             </label>
           </div>
+
           <div className="w-full text-center">
-            <button type='submit' className='text-xl text-white dark:text-blue-600 dark:bg-white/50 dark:hover:bg-white font-medium bg-blue-400 hover:bg-blue-600 rounded-lg p-2'>
+            <button type='submit' className='text-xl w-28 font-semibold transition ease-in-out text-white hover:shadow-xl dark:hover:shadow-lg dark:hover:shadow-stone-500 dark:text-blue-600 dark:bg-white/50 dark:hover:bg-white bg-blue-400 hover:bg-blue-600 rounded-lg p-2'>
               Encrypt  
             </button> 
           </div>     

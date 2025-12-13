@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
-const ListBox = () => {
+interface ListboxProps{
+    selected: string,
+    setSelected: (arg:string) => void
+}
+
+const ListBox:React.FC<ListboxProps> = ({selected,setSelected}) => {
     const [open, setOpen] = useState(false);
 
     const encryption_algorithms = [
         { id: 1, name: 'Default(AES)' },
         { id: 2, name: 'Caesar Cipher' },
-        { id: 3, name: 'RSA' },
-        { id: 4, name: 'Blowfish' }
     ];
-
-    const [selected, setSelected] = useState("");
 
     const handleChange = (name: string) => {
         setSelected(name);
@@ -19,7 +20,7 @@ const ListBox = () => {
 
     return (
         <div className="relative w-48 flex flex-col gap-1">
-            <button aria-required type='button'
+            <button type='button'
                 className="w-40 flex flex-row gap-3 rounded-lg 
                 bg-slate-200 dark:bg-stone-800 dark:border-slate-100 border-[1px] 
                 dark:text-cyan-200 p-2 justify-around"
@@ -36,12 +37,10 @@ const ListBox = () => {
                 ${open ? 'flex flex-col gap-2' : 'hidden'}`}
             >
                 {encryption_algorithms.map((algo) => (
-                    <li
+                    <li 
                         key={algo.id}
                         className="rounded-lg hover:bg-slate-500 cursor-pointer p-1"
-                        onClick={(e) => {
-                            handleChange(algo.name);
-                        }}
+                        onClick={() => handleChange(algo.name)}
                     >
                         {algo.name}
                     </li>
@@ -50,5 +49,4 @@ const ListBox = () => {
         </div>
     );
 };
-
 export default ListBox;
